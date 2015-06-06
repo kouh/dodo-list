@@ -5,19 +5,8 @@ let app = remote.require('app');
 let shell = require('shell');
 let mainWindow = remote.getCurrentWindow();
 
-class DoDoList{
-  constructor(){
-    this._list = [];
-    this._$ul = document.getElementById('dodo-list');
-    this.add('task');
-  }
+let dodoList = document.getElementById('dodo-list');
+console.log(dodolist.tasks);
 
-  add(task){
-    let li = document.createElement('li');
-    li.textContent = task;
-    this._$ul.appendChild(li);
-  }
-}
-
-
-let dodoList = new DoDoList();
+var t = new dodolist(['aaa','bbb']);
+document.getelementbyid('wrapper').appendchild(t);

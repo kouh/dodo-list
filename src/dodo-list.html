@@ -1,0 +1,41 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<dom-module id="dodo-list">
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    ul{
+      list-style: none;
+    }
+  </style>
+  <template>
+    <ul id="list">
+      <template is="dom-repeat" items="{{ tasks }}">
+        <li><input type="checkbox"><span>{{ item }}</span><button>start</button></li>
+      </template>
+    </ul>
+  </template>
+</dom-module>
+
+<script>
+  DoDoList = Polymer({
+    is: "dodo-list",
+    ready: function(){
+      this.tasks = [];
+      console.log('ready');
+    },
+    factoryImpl: function(tasks){
+      this.tasks = tasks;
+      console.log(this.tasks);
+    },
+    
+    properties: {
+    },
+
+    test: function(){
+      console.log('hello world');
+    }
+  });
+</script>
