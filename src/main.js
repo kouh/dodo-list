@@ -35,7 +35,7 @@ var template = [
     type: 'separator'
   },
   {
-    label: 'Hide Chatoon',
+    label: 'Hide DoDoList',
     accelerator: 'Command+H',
     selector: 'hide:'
   },
