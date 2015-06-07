@@ -18,7 +18,6 @@ document.getElementById('start-task').addEventListener('click', function(e){
   timerStart();
 });
 
-
 document.getElementById('pause-task').addEventListener('click', function(e){
   timerStop();
 });
@@ -31,13 +30,15 @@ document.getElementById('stop-task').addEventListener('click', function(e){
 });
 
 function timerStart(){
+  document.getElementById('task-name').textContent = dodoList.selected.name;
+  console.log(dodoList.selected);
   let hour = document.getElementById('h');
   let min = document.getElementById('m');
   let sec = document.getElementById('s');
   timer = setInterval(function(){
-    let h = hour.textContent >>0;
-    let m = min.textContent >>0;
-    let s = sec.textContent >>0;
+    let h = hour.textContent >> 0;
+    let m = min.textContent >> 0;
+    let s = sec.textContent >> 0;
     s++;
     if(s === 60){
       m++;

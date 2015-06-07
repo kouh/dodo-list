@@ -40,7 +40,7 @@
   <template>
     <ul id="list">
       <template is="dom-repeat" items="{{ tasks }}">
-        <li class="task">
+        <li class="task" on-click="taskSelect">
           <input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}">
           <input class="task-name" maxlength="30" value="{{item.name::input}}">
         </li>
@@ -55,13 +55,6 @@
     ready: function(){
       this.tasks = [];
       console.log('ready');
-
-      this.$.list.addEventListener('click', function(e){
-        Array.prototype.forEach.call(this.children, function(li){
-          li.classList.remove('selected');
-        });
-        e.target.closest('li').classList.add('selected');
-      });
     },
     factoryImpl: function(tasks){
       this.tasks = tasks;
@@ -74,6 +67,14 @@
         type: Object,
         value: null,
       }
+    },
+    
+    taskSelect: function(e){
+      this.selected = e.model.item;
+      Array.prototype.forEach.call(this.$.list.children, function(li){
+        li.classList.remove('selected');
+      });
+      e.target.closest('li').classList.add('selected');
     },
 
     add: function(taskName){
