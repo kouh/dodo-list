@@ -6,14 +6,28 @@
       padding: 0;
       box-sizing: border-box;
     }
-    ul{
+    #list{
       list-style: none;
+    }
+
+    #list li{
+      display: flex;
+    }
+
+    .task-done{
+      flex: 1;
+    }
+    .task-name{
+      flex: 7;
+    }
+    .task-start{
+      flex: 2;
     }
   </style>
   <template>
     <ul id="list">
       <template is="dom-repeat" items="{{ tasks }}">
-        <li><input type="checkbox"><span>{{ item }}</span><button>start</button></li>
+        <li><input type="checkbox" class="task-done" checked="{{item.done::change}}"><span class="task-name">{{ item.name }}</span><button class="task-start">start</button></li>
       </template>
     </ul>
   </template>
@@ -26,7 +40,13 @@
       this.tasks = [];
       console.log('ready');
     },
-    factoryImpl: function(tasks){
+    factoryImpl: function(taskNames){
+      var tasks = taskNames.map(function(taskName){
+        return {
+          done: false,
+          name: taskName,
+        };
+      });
       this.tasks = tasks;
       console.log(this.tasks);
     },
