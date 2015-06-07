@@ -1,13 +1,18 @@
 "use strict";
 let remote = require('remote');
+let ipc = require('ipc');
 let path = require('path');
 let app = remote.require('app');
 let shell = require('shell');
 let mainWindow = remote.getCurrentWindow();
 
-let dodoList = document.getElementById('dodo-list');
-
+var dodoList = document.getElementById('dodo-list');
+let share = remote.getGlobal('share');
 let timer = null;
+
+ipc.on('createTask', function(task){
+  dodoList.add(task);
+});
 document.getElementById('add-task').addEventListener('click', function(e){
   dodoList.add();
 });

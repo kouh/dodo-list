@@ -1,4 +1,5 @@
 var app = require('app');
+var ipc = require('ipc');
 var BrowserWindow = require('browser-window');
 
 var globalShortcut = require('global-shortcut');
@@ -141,11 +142,13 @@ var template = [
 },
   ];
 
-
 app.on('ready', function(){
   createWindow();
   menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
+  ipc.on('createTask', function(event, msg){
+    mainWindow.webContents.send('createTask', msg);
+  });
 
   // trayIcon = new Tray(__dirname + '/asset/icon.png');
   //
@@ -158,7 +161,21 @@ app.on('ready', function(){
   // });
 
   //ショートカット
-  var ret = globalShortcut.register('ctrl+t', function() { console.log('ctrl+t is pressed'); })
+  var ret = globalShortcut.register('ctrl+t', function() { 
+    console.log('ctrl+t is pressed'); 
+
+    var w = new BrowserWindow({
+      width: 500,
+      height: 30,
+      'use-content-size': true,
+      frame: false,
+      transparent: false,
+      'always-on-top': true,
+      'show': true,
+      // 'skip-taskbar': true,
+    });
+    w.loadUrl('file://' + __dirname + '/create-task.html');
+  });
 });
 
 app.on('before-quit', function(){
@@ -175,7 +192,10 @@ function createWindow() {
     // 'skip-taskbar': true,
   });
   mainWindow.loadUrl('file://' + __dirname + '/main.html');
-  mainWindow.on('close', function(e) {
+  mainWindow.on('focus', function(){
+    console.log('focus.');
+  });
+  mainWindow.on('close', function() {
     console.log('close.');
   });
   mainWindow.on('closed', function(){
