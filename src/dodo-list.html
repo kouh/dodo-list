@@ -39,7 +39,7 @@
       <template is="dom-repeat" items="{{ tasks }}">
         <li class="task" on-click="taskSelect">
           <input type="checkbox" class="task-done" checked="{{item.done::change}}">
-          <input class="task-name" maxlength="30" on-keydown="keydown" value="{{item.name::input}}">
+          <input class="task-name" maxlength="30" autofocus on-keydown="keydown" value="{{item.name::input}}">
         </li>
       </template>
     </ul>
@@ -52,8 +52,6 @@
     ready: function(){
       this.tasks = [];
       console.log('ready');
-
-
     },
     factoryImpl: function(tasks){
       this.tasks = tasks;
