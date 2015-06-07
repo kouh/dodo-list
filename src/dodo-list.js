@@ -6,7 +6,7 @@ let shell = require('shell');
 let mainWindow = remote.getCurrentWindow();
 
 let dodoList = document.getElementById('dodo-list');
-console.log(dodolist.tasks);
+console.log(dodoList.tasks);
 
-var t = new dodolist(['aaa','bbb']);
-document.getelementbyid('wrapper').appendchild(t);
+var t = new DoDoList(['aaa','bbb']);
+document.getElementById('wrapper').appendChild(t);
