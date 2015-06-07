@@ -142,14 +142,23 @@ var template = [
 },
   ];
 
+var taskCreateWindow = null;
 app.on('ready', function(){
   createWindow();
   menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
   ipc.on('createTask', function(event, msg){
     mainWindow.webContents.send('createTask', msg);
+    taskCreateWindow.hide();
+    mainWindow.showInactive();
+    Menu.sendActionToFirstResponder('hide:');
   });
 
+  ipc.on('cancelCreateTask', function(event, msg){
+    taskCreateWindow.hide();
+    mainWindow.showInactive();
+    Menu.sendActionToFirstResponder('hide:');
+  });
   // trayIcon = new Tray(__dirname + '/asset/icon.png');
   //
   // trayIcon.on('clicked', function() {
@@ -160,21 +169,21 @@ app.on('ready', function(){
   //   }
   // });
 
+  taskCreateWindow = new BrowserWindow({
+    width: 500,
+    height: 30,
+    'use-content-size': true,
+    frame: false,
+    transparent: false,
+    'always-on-top': true,
+    'show': false,
+    // 'skip-taskbar': true,
+  });
+  taskCreateWindow.loadUrl('file://' + __dirname + '/create-task.html');
   //ショートカット
   var ret = globalShortcut.register('ctrl+t', function() { 
-    console.log('ctrl+t is pressed'); 
-
-    var w = new BrowserWindow({
-      width: 500,
-      height: 30,
-      'use-content-size': true,
-      frame: false,
-      transparent: false,
-      'always-on-top': true,
-      'show': true,
-      // 'skip-taskbar': true,
-    });
-    w.loadUrl('file://' + __dirname + '/create-task.html');
+    mainWindow.hide();
+    taskCreateWindow.show();
   });
 });
 
@@ -192,7 +201,8 @@ function createWindow() {
     // 'skip-taskbar': true,
   });
   mainWindow.loadUrl('file://' + __dirname + '/main.html');
-  mainWindow.on('focus', function(){
+  mainWindow.on('focus', function(e){
+    // taskCreateWindow.hide();
     console.log('focus.');
   });
   mainWindow.on('close', function() {
