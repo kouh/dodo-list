@@ -1,6 +1,9 @@
 <link rel="import" href="bower_components/polymer/polymer.html">
 <dom-module id="dodo-list">
   <style>
+    :host{
+      display: block;
+    }
     *{
       margin: 0;
       padding: 0;
@@ -27,7 +30,7 @@
   <template>
     <ul id="list">
       <template is="dom-repeat" items="{{ tasks }}">
-        <li><input type="checkbox" class="task-done" checked="{{item.done::change}}"><span class="task-name">{{ item.name }}</span><button class="task-start">start</button></li>
+        <li><input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}"><span class="task-name">{{ item.name }}</span><button class="task-start">start</button></li>
       </template>
     </ul>
   </template>
@@ -40,13 +43,7 @@
       this.tasks = [];
       console.log('ready');
     },
-    factoryImpl: function(taskNames){
-      var tasks = taskNames.map(function(taskName){
-        return {
-          done: false,
-          name: taskName,
-        };
-      });
+    factoryImpl: function(tasks){
       this.tasks = tasks;
       console.log(this.tasks);
     },
@@ -54,8 +51,13 @@
     properties: {
     },
 
-    test: function(){
-      console.log('hello world');
+    add: function(taskName){
+      taskName = taskName || 'new task';
+      this.push('tasks', {
+        done: false,
+        name: taskName,
+        started: false,
+      });
     }
   });
 </script>
