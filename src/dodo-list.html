@@ -4,29 +4,26 @@
     :host{
       display: block;
     }
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    #list{
-      list-style: none;
+    input{
+      vertical-align:middle; 
+      font-size: 1.2em;
     }
 
     #list li{
       display: flex;
       align-items: center;
       padding: 0.2em 0.5em;
+      height: 2.5em;
     }
 
     .task-done{
       flex: 1;
+      height: 100%;
     }
     .task-name{
       flex: 11;
       border: none;
-      resize: none;
-      height: auto;
+      height: 100%;
     }
 
     .task-name:focus{
