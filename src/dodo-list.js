@@ -9,7 +9,7 @@ let dodoList = document.getElementById('dodo-list');
 
 let timer = null;
 document.getElementById('add-task').addEventListener('click', function(e){
- dodoList.add(); 
+  dodoList.add();
 });
 
 
@@ -29,6 +29,7 @@ document.getElementById('stop-task').addEventListener('click', function(e){
   document.getElementById('m').textContent = '00';
   document.getElementById('s').textContent = '00';
 });
+
 function timerStart(){
   let hour = document.getElementById('h');
   let min = document.getElementById('m');
@@ -50,7 +51,7 @@ function timerStart(){
     if(h < 10) h = '0' + h;
     if(m < 10) m = '0' + m;
     if(s < 10) s = '0' + s;
-
+    
     hour.textContent = h;
     min.textContent = m;
     sec.textContent = s;
