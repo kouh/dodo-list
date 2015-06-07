@@ -19,12 +19,13 @@ document.getElementById('add-task').addEventListener('click', function(e){
 
 
 document.getElementById('start-task').addEventListener('click', function(e){
-  timerStop();
-  timerStart();
-});
-
-document.getElementById('pause-task').addEventListener('click', function(e){
-  timerStop();
+  if(timer === null){
+    timerStart();
+    this.textContent = 'Pause';
+  }else{
+    timerStop();
+    this.textContent = 'Start';
+  }
 });
 
 document.getElementById('stop-task').addEventListener('click', function(e){
