@@ -30,7 +30,11 @@
   <template>
     <ul id="list">
       <template is="dom-repeat" items="{{ tasks }}">
-        <li><input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}"><span class="task-name">{{ item.name }}</span><button class="task-start">start</button></li>
+        <li>
+          <input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}">
+          <span class="task-name">{{ item.name }}</span>
+          <button class="task-start">start</button>
+        </li>
       </template>
     </ul>
   </template>
