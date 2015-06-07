@@ -23,11 +23,16 @@
       flex: 1;
     }
     .task-name{
-      flex: 7;
+      flex: 11;
+      border: none;
+      resize: none;
+      height: auto;
     }
-    .task-start{
-      flex: 2;
+
+    .task-name:focus{
+      outline: none;
     }
+
     .selected{
       box-shadow: 0px 0px 0px 1px #ff0000 ;
     }
@@ -37,8 +42,7 @@
       <template is="dom-repeat" items="{{ tasks }}">
         <li class="task">
           <input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}">
-          <span class="task-name">{{ item.name }}</span>
-          <button class="task-start">start</button>
+          <input class="task-name" maxlength="30" value="{{item.name::input}}">
         </li>
       </template>
     </ul>
