@@ -13,6 +13,8 @@ let timer = null;
 ipc.on('createTask', function(task){
   dodoList.add(task);
 });
+
+dodoList.add();
 document.getElementById('add-task').addEventListener('click', function(e){
   dodoList.add();
 });
