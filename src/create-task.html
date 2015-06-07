@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+      html,body{
+        height: 100%;
+      }
+      div{
+        height: 100%;
+      }
+      input{
+        font-size: 1.5em;
+        height: 100%;
+        width: 100%;
+        border: none;
+      }
+
+      input:focus{
+        outline: none;
+      }
+      </style>
+  </head>
+  <body>
+    <div>
+    <input type="text" id="input" placeholder="task">
+  </div>
+    <script>
+      var remote = require('remote');
+      var mainWindow = remote.getCurrentWindow();        
+      var ipc = require('ipc');
+      var input = document.getElementById('input');
+      input.addEventListener('keydown', function(e){
+        console.log(e.keyCode);
+        if(e.keyCode === 13){
+          ipc.send('createTask', this.value);
+          mainWindow.close();
+        }else if(e.keyCode === 27){
+          mainWindow.close();
+        }
+      });
+      input.focus();
+    </script>
+  </body>
+</html>
