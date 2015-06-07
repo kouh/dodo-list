@@ -41,7 +41,7 @@
     <ul id="list">
       <template is="dom-repeat" items="{{ tasks }}">
         <li class="task" on-click="taskSelect">
-          <input type="checkbox" class="task-done" disabled="{{!item.started}}" checked="{{item.done::change}}">
+          <input type="checkbox" class="task-done" checked="{{item.done::change}}">
           <input class="task-name" maxlength="30" value="{{item.name::input}}">
         </li>
       </template>
