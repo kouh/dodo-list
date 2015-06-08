@@ -39,8 +39,10 @@
         console.log(e.keyCode);
         if(e.keyCode === 13){
           ipc.send('createTask', this.value);
+          this.value = '';
         }else if(e.keyCode === 27){
           ipc.send('cancelCreateTask');
+          this.value = '';
         }
       });
       input.focus();
