@@ -15,10 +15,6 @@ ipc.on('createTask', function(task){
 });
 
 dodoList.add();
-document.getElementById('add-task').addEventListener('click', function(e){
-  dodoList.add();
-});
-
 
 document.getElementById('start-task').addEventListener('click', function(e){
   if(timer === null){
