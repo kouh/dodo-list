@@ -31,10 +31,8 @@ try{
 document.getElementById('start-task').addEventListener('click', function(e){
   if(timer === null){
     timerStart();
-    this.textContent = 'Pause';
   }else{
     timerStop();
-    this.textContent = 'Start';
   }
 });
 
@@ -55,6 +53,7 @@ function timerStart(){
   let hour = document.getElementById('h');
   let min = document.getElementById('m');
   let sec = document.getElementById('s');
+  document.getElementById('start-task').textContent = 'Pause';
   timer = setInterval(function(){
     let h = hour.textContent >> 0;
     let m = min.textContent >> 0;
@@ -85,4 +84,5 @@ function timerStop(){
 
   clearInterval(timer);
   timer = null;
+  document.getElementById('start-task').textContent = 'Start';
 }
