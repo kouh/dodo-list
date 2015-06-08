@@ -36,7 +36,6 @@
       var ipc = require('ipc');
       var input = document.getElementById('input');
       input.addEventListener('keydown', function(e){
-        console.log(e.keyCode);
         if(e.keyCode === 13){
           ipc.send('createTask', this.value);
           this.value = '';
