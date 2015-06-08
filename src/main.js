@@ -181,7 +181,7 @@ app.on('ready', function(){
   });
   taskCreateWindow.loadUrl('file://' + __dirname + '/create-task.html');
   //ショートカット
-  var ret = globalShortcut.register('ctrl+t', function() { 
+  var ret = globalShortcut.register('ctrl+d', function() { 
     mainWindow.hide();
     taskCreateWindow.show();
   });
