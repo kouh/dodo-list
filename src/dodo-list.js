@@ -4,17 +4,29 @@ let ipc = require('ipc');
 let path = require('path');
 let app = remote.require('app');
 let shell = require('shell');
+let fs = require('fs');
 let mainWindow = remote.getCurrentWindow();
 
 var dodoList = document.getElementById('dodo-list');
 let share = remote.getGlobal('share');
 let timer = null;
+const DATA_FILE = './settings.json';
 
 ipc.on('createTask', function(task){
   dodoList.add(task);
 });
 
-dodoList.add();
+try{
+  let tasks = require(DATA_FILE);
+  if(tasks instanceof Array){
+    dodoList.factoryImpl(tasks);
+  }else{
+    dodoList.add();
+  }
+}catch(e){
+  console.log(e);
+  dodoList.add();
+}
 
 document.getElementById('start-task').addEventListener('click', function(e){
   if(timer === null){
@@ -32,6 +44,10 @@ document.getElementById('stop-task').addEventListener('click', function(e){
   document.getElementById('m').textContent = '00';
   document.getElementById('s').textContent = '00';
 });
+
+window.onbeforeunload = function(){
+  fs.writeFileSync(DATA_FILE, JSON.stringify(dodoList.tasks, null, '  '));
+};
 
 function timerStart(){
   document.getElementById('task-name').textContent = dodoList.selected.name;
