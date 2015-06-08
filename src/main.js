@@ -193,7 +193,7 @@ app.on('before-quit', function(){
 function createWindow() {
 
   mainWindow = new BrowserWindow({
-    width: 1280,
+    width: 640,
     height: 720,
     frame: false,
     transparent: false,

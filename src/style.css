@@ -18,6 +18,27 @@ img{
   height: 100%;
 }
 
+button{
+  padding: .5em;
+}
+
+.buttons{
+  text-align: center;
+  margin-top: 1em;
+}
+
+#time{
+  text-align: center;
+  font-size: 5em;
+  margin: 0;
+}
+
+#task-name{
+  text-align: center;
+  font-size: 1.5em;
+  min-height: 1.5em;
+}
+
 dodo-list{
   width: 500px;
   margin: 0 auto;
