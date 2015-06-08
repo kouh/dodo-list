@@ -85,6 +85,14 @@
         if(e.model.item !== this.tasks[this.tasks.length-1]){
           e.target.parentNode.nextElementSibling.querySelector('.task-name').focus();
         }
+      }else if(e.keyCode === 8){
+        if(e.target.value === ''){
+          if(e.model.item !== this.tasks[0]){
+            e.target.parentNode.previousElementSibling.querySelector('.task-name').focus();
+          }
+          this.splice('tasks', e.model.index, 1);
+          e.preventDefault();
+        }
       }
 
     },
