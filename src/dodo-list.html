@@ -67,15 +67,16 @@
 
     keydown: function(e){
       if(e.keyCode === 13){
-        if(e.model.item !== this.tasks[this.tasks.length-1]){
+        this.splice('tasks', e.model.index + 1, 0, {
+          done: false,
+          name: '',
+          started: false,
+        });
+        
+        setTimeout(function(){
           e.target.parentNode.nextElementSibling.querySelector('.task-name').focus();
-        }else{
-          this.add();
-          var self = this;
-          setTimeout(function(){
-            self.keydown(e);
-          }, 0);
-        }
+        }, 0);
+
       }else if(e.keyCode === 38){
         if(e.model.item !== this.tasks[0]){
           e.target.parentNode.previousElementSibling.querySelector('.task-name').focus();
