@@ -10,7 +10,7 @@ let mainWindow = remote.getCurrentWindow();
 var dodoList = document.getElementById('dodo-list');
 let share = remote.getGlobal('share');
 let timer = null;
-const DATA_FILE = './settings.json';
+const DATA_FILE = __dirname + '/settings.json';
 
 ipc.on('createTask', function(task){
   dodoList.add(task);
