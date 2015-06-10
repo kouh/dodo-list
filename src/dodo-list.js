@@ -38,9 +38,7 @@ document.getElementById('start-task').addEventListener('click', function(e){
 
 document.getElementById('stop-task').addEventListener('click', function(e){
   timerStop();
-  document.getElementById('h').textContent = '00';
-  document.getElementById('m').textContent = '00';
-  document.getElementById('s').textContent = '00';
+  document.getElementById('time').textContent = '00:00:00';
 });
 
 window.onbeforeunload = function(){
@@ -50,33 +48,25 @@ window.onbeforeunload = function(){
 function timerStart(){
   document.getElementById('task-name').textContent = dodoList.selected.name;
   console.log(dodoList.selected);
-  let hour = document.getElementById('h');
-  let min = document.getElementById('m');
-  let sec = document.getElementById('s');
+  let time = document.getElementById('time');
   document.getElementById('start-task').textContent = 'Pause';
+  var startTime = new Date().getTime();
   timer = setInterval(function(){
-    let h = hour.textContent >> 0;
-    let m = min.textContent >> 0;
-    let s = sec.textContent >> 0;
-    s++;
-    if(s === 60){
-      m++;
-      s = 0;
-      if(m === 60){
-        h++;
-        m = 0;
-      }
-    }
-
+    // console.time('All');
+    let diff = (new Date().getTime() - startTime) /1000;
+    let h = (diff / 3600)>>0;
+    let m = ((diff % 3600) / 60)>>0;
+    let s = ((diff % 3600) % 60)>>0;
+    
     if(h < 10) h = '0' + h;
     if(m < 10) m = '0' + m;
     if(s < 10) s = '0' + s;
     
-    hour.textContent = h;
-    min.textContent = m;
-    sec.textContent = s;
+    time.textContent = `${h}:${m}:${s}`;
 
-  }, 1000);
+    // console.timeEnd('All');
+    
+  },100);
 }
 
 function timerStop(){
