@@ -93,7 +93,9 @@
       }else if(e.keyCode === 8){ // Delete
         if(e.target.value === ''){
           if(e.model.item !== this.tasks[0]){
-            e.target.parentNode.previousElementSibling.querySelector('.task-name').focus();
+            var target = e.target.parentNode.previousElementSibling.querySelector('.task-name');
+            target.focus();
+            target.selectionStart = target.selectionEnd = target.value.length;
             this.splice('tasks', e.model.index, 1);
           }
           e.preventDefault();
