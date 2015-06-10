@@ -71,7 +71,7 @@
     },
 
     keydown: function(e){
-      if(e.keyCode === 13){
+      if(e.keyCode === 13){ // Return
         this.splice('tasks', e.model.index + 1, 0, {
           done: false,
           name: '',
@@ -82,15 +82,15 @@
           e.target.parentNode.nextElementSibling.querySelector('.task-name').focus();
         }, 0);
 
-      }else if(e.keyCode === 38){
+      }else if(e.keyCode === 38){ // Up
         if(e.model.item !== this.tasks[0]){
           e.target.parentNode.previousElementSibling.querySelector('.task-name').focus();
         }
-      }else if(e.keyCode === 40){
+      }else if(e.keyCode === 40){ // Down
         if(e.model.item !== this.tasks[this.tasks.length-1]){
           e.target.parentNode.nextElementSibling.querySelector('.task-name').focus();
         }
-      }else if(e.keyCode === 8){
+      }else if(e.keyCode === 8){ // Delete
         if(e.target.value === ''){
           if(e.model.item !== this.tasks[0]){
             e.target.parentNode.previousElementSibling.querySelector('.task-name').focus();
