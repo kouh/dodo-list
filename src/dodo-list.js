@@ -74,7 +74,7 @@ function timerStart(){
 
     // console.timeEnd('All');
     
-  },100);
+  },1000);
 }
 
 function timerStop(){
