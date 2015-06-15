@@ -6,7 +6,8 @@ let app = remote.require('app');
 let shell = require('shell');
 let fs = require('fs');
 let mainWindow = remote.getCurrentWindow();
-
+var startTime;
+var stopTime;
 var dodoList = document.getElementById('dodo-list');
 let share = remote.getGlobal('share');
 let timer = null;
@@ -38,6 +39,8 @@ document.getElementById('start-task').addEventListener('click', function(e){
 
 document.getElementById('stop-task').addEventListener('click', function(e){
   timerStop();
+  startTime = undefined;
+  stopTime = undefined;
   document.getElementById('time').textContent = '00:00:00';
 });
 
@@ -50,7 +53,12 @@ function timerStart(){
   console.log(dodoList.selected);
   let time = document.getElementById('time');
   document.getElementById('start-task').textContent = 'Pause';
-  var startTime = new Date().getTime();
+  if(stopTime){
+    startTime = startTime + new Date().getTime() - stopTime;
+  }
+  if(!startTime){
+    startTime = new Date().getTime();
+  }
   timer = setInterval(function(){
     // console.time('All');
     let diff = (new Date().getTime() - startTime) /1000;
@@ -71,7 +79,7 @@ function timerStart(){
 
 function timerStop(){
   if(timer === null) return;
-
+  stopTime = new Date().getTime();
   clearInterval(timer);
   timer = null;
   document.getElementById('start-task').textContent = 'Start';
