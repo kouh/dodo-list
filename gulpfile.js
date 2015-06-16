@@ -7,7 +7,7 @@ var option = {
   packageJson: packageJson,
   release: './release',
   cache: './cache',
-  version: 'v0.27.1',
+  version: 'v0.28.1',
   rebuild: false,
   platforms: ['darwin-x64']
   // ['darwin','win32','linux','darwin-x64','linux-ia32','linux-x64','win32-ia32','win64-64']
